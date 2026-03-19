@@ -31,3 +31,27 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Maven
+target/
+*.jar
+*.war
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+
+# Node (if frontend)
+node_modules/
+
+# Environment
+.env
