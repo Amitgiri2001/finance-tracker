@@ -22,6 +22,20 @@ public class TxnService {
 		return txnRepo.findAll();
 	}
 	
+	public Transaction update(Long id,Transaction txn) {
+		Transaction existingTxn=txnRepo.findById(id).orElseThrow(()->
+		new RuntimeException("Transaction not found with this id: "+id));
+		
+		existingTxn.setAmount(txn.getAmount());
+		existingTxn.setCategory(txn.getCategory());
+		existingTxn.setDate(txn.getDate());
+		existingTxn.setTime(txn.getTime());
+		existingTxn.setNote(txn.getNote());
+		existingTxn.setType(txn.getType());
+		
+		return txnRepo.save(existingTxn);
+	}
+	
 	public void delete(Long id) {
 		txnRepo.deleteById(id);
 	}

@@ -1,8 +1,13 @@
 package com.amitgiri.financetracker.entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "transactions")
@@ -20,18 +25,21 @@ public class Transaction {
 	
 	private LocalDate date;
 	
+	private LocalTime time;
+	
 	private String note;
 	
 	public Transaction() {
 		
 	}
 
-	public Transaction(String type, String category, int amount, LocalDate date, String note) {
+	public Transaction(String type, String category, int amount, LocalDate date,LocalTime time, String note) {
 		super();
 		this.type = type;
 		this.category = category;
 		this.amount = amount;
 		this.date = date;
+		this.time=time;
 		this.note = note;
 	}
 
@@ -68,6 +76,14 @@ public class Transaction {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
 	}
 
 	public String getNote() {
