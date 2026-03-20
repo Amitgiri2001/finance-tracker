@@ -1,5 +1,6 @@
 package com.amitgiri.financetracker.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amitgiri.financetracker.entity.Transaction;
@@ -25,6 +27,21 @@ public class TxnController {
 	@GetMapping("/all")
 	public List<Transaction> getAllTxn(){
 		return txnService.getAll();
+	}
+	
+	@GetMapping("/date")
+	public List<Transaction> getByDate(@RequestParam LocalDate date){
+		return txnService.getByDate(date);
+	}
+	
+	@GetMapping("/week")
+	public List<Transaction> getByWeek(@RequestParam LocalDate date){
+		return txnService.getByWeek(date);
+	}
+	
+	@GetMapping("/month")
+	public List<Transaction> getByDate(@RequestParam int year, @RequestParam int month){
+		return txnService.getByMonth(year,month);
 	}
 	
 	@PostMapping
