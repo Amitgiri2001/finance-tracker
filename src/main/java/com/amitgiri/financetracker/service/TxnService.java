@@ -20,7 +20,7 @@ public class TxnService {
 	}
 	
 	public List<Transaction> getAll(){
-		return txnRepo.findAll();
+			return txnRepo.findAllByOrderByDateAscTimeAsc();
 	}
 	
 	public List<Transaction> getByDate(LocalDate date){
