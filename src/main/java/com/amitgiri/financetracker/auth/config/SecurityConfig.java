@@ -47,7 +47,8 @@ public class SecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(java.util.List.of("http://localhost:5173",
-                "https://*.vercel.app"
+                "https://*.vercel.app",
+                "https://finance-tracker-frontend-git-main-amitgiri2001s-projects.vercel.app"
         		));
         config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(java.util.List.of("*"));
