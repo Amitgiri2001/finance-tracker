@@ -23,4 +23,6 @@ public class AuthController {
     public String login(@RequestBody User user) {
         return authService.login(user.getEmail(), user.getPassword());
     }
+    
+    
 }

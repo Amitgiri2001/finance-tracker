@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -30,24 +31,30 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
-
+        System.out.println(authHeader);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-
+        	
             String token = authHeader.substring(7);
-
+            System.out.println("Token: " + token);
+            System.out.println("Valid: " + jwtUtil.validateToken(token));
+            
+            
             if (jwtUtil.validateToken(token)) {
 
                 String email = jwtUtil.extractEmail(token);
 
                 // 🔥 THIS IS THE MISSING PART
                 UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(
-                                email,
-                                null,
-                                Collections.emptyList()
-                        );
+                	    new UsernamePasswordAuthenticationToken(
+                	        email,
+                	        null,
+                	        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                	    );
 
                 SecurityContextHolder.getContext().setAuthentication(auth);
+            }else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;               
             }
         }
 
